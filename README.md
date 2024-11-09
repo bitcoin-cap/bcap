@@ -268,7 +268,7 @@ They include:
 - Users who use bitcoin as a store of value
 - Remittance service providers and users
 - Developers and users of payment solutions like Lightning
-- Users and developers of Bitcoin-based NFTs or Fungible Tokens applications (e.g., Ordinals, BRC-20, Runes)
+- Users and developers of Bitcoin-based applications for NFTs (e.g. Ordinals) and fungible tokens (e.g. BRC-20 and Runes)
 - Users and developers of Bitcoin-based DeFi applications
 - Developers creating smart contract-like functionality on Bitcoin
 - Teams working on sidechains or Layer 2 solutions for advanced functionality
