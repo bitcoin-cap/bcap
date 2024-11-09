@@ -257,7 +257,7 @@ Incentives:
 - Improve bitcoin's technical capabilities and security.
 - Maintain their reputation within the developer community.
 - Often motivated by ideological commitment to bitcoin's principles.
-- May be incentivized by developer sponsorships.
+- Sponsorships and donations.
 
 ### Users and Application Developers
 
