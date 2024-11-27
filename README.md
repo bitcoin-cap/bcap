@@ -236,7 +236,18 @@ Powers:
 - Potentially censor transactions by not including them in blocks.
 - Direct hash power to compete for chains in the event of a fork. Each ASIC mining chip can only mine for one side of a fork.[^7]
 
-In the current environment, Miners rarely run bitcoin software to construct block templates and thus do not directly control which consensus rules to follow, only a handful of pools do. However, the switching costs are low for a miner to switch to another pool. So if a pool acts against the interests of a miner, they will lose customers. The Miner’s state of mind (SOM) matters, if the miner is unaware or apathetic (SOM3, SOM4) then they might not even be aware it is in their interest to switch pools. In the future, we may see a shift toward Miners running bitcoin software and directly controlling transaction selection and choosing consensus rules with protocols such as Stratum v2 and Braidpool.[^8] [^9]
+In the current environment, Miners rarely run bitcoin software to construct block templates and thus do not directly control which consensus rules to follow, only a handful of pools do. However, the switching costs are low for a miner to switch to another pool. So if a pool acts against the interests of a miner, they will lose customers. The Miner’s state of mind (SOM) matters, if the miner is unaware or apathetic (SOM3, SOM4) then they might not even be aware it is in their interest to switch pools. 
+
+The current segmentation of Miners power is detailed below
+
+| Segment of Miner                      | Create new blocks                           | Signal readiness for protocol changes                          | Censor transactions      | Direct hash power to competing chain |
+| ------------------------------------- | ------------------------------------------- | -------------------------------------------------------------- | ------------------------ | ------------------------------------ |
+| Individual Miners                     | Possible, if solo mining                    | Possible, if solo mining                                       | Possible, if solo mining | Yes                                  |
+| Large Scale Miners                    | No                                          | No                                                             | No                       | Yes                                  |
+| Mining Pools                          | Yes                                         | Yes                                                            | Yes                      | No                                   |
+| Chip manufacturers                    | No                                          | No                                                             | No                       | No                                   |
+
+In the future, we may see a shift toward Miners running bitcoin software and directly controlling transaction selection and choosing consensus rules with protocols such as Stratum v2 and Braidpool.[^8] [^9] 
 
 Incentives:
 
