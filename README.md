@@ -797,6 +797,24 @@ However stakeholders should carefully evaluate alternative clients based on the 
   - How does the alternative client differ from Bitcoin Core and what are the implications for all stakeholders?
   - If the alternative client is credible, what might be the safest activation mechanism to adopt the consensus change?
 
+### Case study: BIP110 (Reduced Data Temporary Softfork)
+
+In late 2025 a UASF was proposed which was assigned BIP110 in December 2025. The aim of the UASF was to "temporarily limit the size of data fields at the consensus level" in order to correct what the author described as "distorted incentives caused by standardizing support for arbitrary data".[^34] The soft fork rules invalidate transactions with several data-carrying constructions for 52,416 blocks (roughly one year). UTXOs created before activation are exempt, and once the deployment expires all UTXOs are intended to be unrestricted. At the time of writing, the outcome is unresolved, however miner signaling remains far below threshold ahead of the mandatory signaling window.
+
+The claimed temporary nature of the soft fork is highly contested. Critics argue that consensus rules cannot meaningfully bind future behavior, and that any node that continues enforcing past expiry will treat the reversion as a rule-loosening event (a hard fork from its perspective). Proponents claimed that the expiry is encoded as part of the BIP110 soft fork, so enforcing nodes can relax the rules in lockstep in a manner that is not a hard fork. 
+
+The activation mechanism, implemented in a fork of Bitcoin Knots and later shipped in Bitcoin Knots [^35] combines features of BIP8 and BIP9. Miners signal via BIP9-style version bits (bit 4), but there is no timeout and no FAILED state; instead a BIP8-like max_activation_height guarantees activation (for enforcing nodes only). Should the threshold not be reached earlier, mandatory signaling is enforced from block 961,632 to 963,647, during which enforcing nodes reject non-signaling blocks.
+
+Unlike standard BIP9's 95% threshold, BIP110 requires only 55% (1,109 of 2,016 blocks). The authors stated rationale is that rejecting data storage is "a matter of urgency" and that a temporary, expiring soft fork justifies a lower bar.[^36] This threshold measures miner signaling only, which as mentioned previously can be spoofed. This would leave enforcing hashrate in the minority at the moment enforcement begins.
+
+The BIP110 soft fork is an example of the Alternative Consensus Client path analyzed earlier in this documen: a consensus change not merged into Bitcoin Core, activated through an alternative client, with two distinct points where a chain split can begin, namely the start of mandatory signaling, and rule enforcement at activation. 
+
+As with any soft fork, miners who do not enforce the new rules risk having their blocks reorged if non-enforcing hashrate is the minority. The validity is asymmetric in that blocks produced by enforcing miners remain valid under non-enforcing rules, while the reverse does not hold, so a majority-enforcing chain would be expected to overtake and reorg non-enforcing blocks, and non-enforcing nodes would follow it automatically.
+
+Proponents have cited this to argue that enforcing BIP110 is the safer choice for miners and node operators, but the argument inverts when enforcing hashrate is a minority. The enforcing chain is then expected to remain the less-work chain, non-enforcing miners face little expected reorg risk from it, and enforcing nodes, which reject the most-work chain as invalid, fork themselves onto a low-hashrate minority chain, producing a persistent split rather than a resolution by work. 
+
+A BIP110 Fork Simulator was developed which explains the potential fork points, and models this fork race under configurable hashrate assumptions.[^37]
+
 # Recommendations
 
 ## Proposals Maturing Toward Possible Consensus
@@ -915,3 +933,7 @@ To a long, healthy, prosperous bitcoin!
 [^31]: The disruption does not necessarily require high transaction fee transactions, it could be done out of band with private mining mempool products
 [^32]: [https://x.com/giacomozucco/status/1826219048528396784](https://x.com/giacomozucco/status/1826219048528396784)
 [^33]: [https://www.blackrock.com/us/individual/resources/regulatory-documents/stream-document?stream=reg&product=IUS-IBIT-J&shareClass=NA&documentId=2212465%7E2224307%7E2275834%7E2249884&iframeUrlOverride=%2Fus%2Findividual%2Fliterature%2Fprospectus%2Fp-ishares-bitcoin-trust-12-31.pdf](https://www.blackrock.com/us/individual/resources/regulatory-documents/stream-document?stream=reg&product=IUS-IBIT-J&shareClass=NA&documentId=2212465%7E2224307%7E2275834%7E2249884&iframeUrlOverride=%2Fus%2Findividual%2Fliterature%2Fprospectus%2Fp-ishares-bitcoin-trust-12-31.pdf)
+[^34]: [https://github.com/bitcoin/bips/blob/master/bip-0110.mediawiki](https://github.com/bitcoin/bips/blob/master/bip-0110.mediawiki)
+[^35]: [https://github.com/bitcoinknots/bitcoin/compare/29.x-knots...dathonohm:bitcoin:uasf-modified-bip9](https://github.com/bitcoinknots/bitcoin/compare/29.x-knots...dathonohm:bitcoin:uasf-modified-bip9)
+[^36]: [https://github.com/bitcoin/bips/blob/master/bip-0110.mediawiki#deviations-from-bip9](https://github.com/bitcoin/bips/blob/master/bip-0110.mediawiki#deviations-from-bip9)
+[^37]: [https://bip110.orange.surf/](https://bip110.orange.surf/)
