@@ -719,6 +719,10 @@ Key considerations:
 - Clear communication and signaling among Economic Nodes can help prevent unintended splits.
 - The more economic activity concentrated on upgraded nodes, the stronger the incentive for Miners to follow the upgraded chain, reducing chain split risks.
 
+**Quantifying the adoption threshold**
+
+A 2026 simulation study modeling a contested bitcoin soft fork against a simulated bitcoin network found that this low/medium/high structure maps onto explicit thresholds in the fraction of Economic Node custody weight supporting the new rules (E). Below E≈0.50, the new rules could not win regardless of Miner commitment (a "cascade floor"); between E≈0.50 and E≈0.82, the outcome depended on Miner commitment (an "inversion zone"); above E≈0.82, the new rules won regardless of Miner commitment (an "economic override threshold"). Within the inversion zone, the study also identified an "Economic Self-Sustaining Point" around E≈0.74, above which the price signal favoring the new rules became self-reinforcing rather than dependent on continued Miner cooperation. These figures come from parameter sweeps of a simulated, hypothetical rule change and should be read as illustrating the shape of the dynamic rather than as precise real-world values.[^34]
+
 **Impact of bounty size on chain split risks**
 
 The size of the potential bounty in purchasing power terms for a chain split can significantly influence the likelihood and severity of such disruptions.
@@ -915,3 +919,4 @@ To a long, healthy, prosperous bitcoin!
 [^31]: The disruption does not necessarily require high transaction fee transactions, it could be done out of band with private mining mempool products
 [^32]: [https://x.com/giacomozucco/status/1826219048528396784](https://x.com/giacomozucco/status/1826219048528396784)
 [^33]: [https://www.blackrock.com/us/individual/resources/regulatory-documents/stream-document?stream=reg&product=IUS-IBIT-J&shareClass=NA&documentId=2212465%7E2224307%7E2275834%7E2249884&iframeUrlOverride=%2Fus%2Findividual%2Fliterature%2Fprospectus%2Fp-ishares-bitcoin-trust-12-31.pdf](https://www.blackrock.com/us/individual/resources/regulatory-documents/stream-document?stream=reg&product=IUS-IBIT-J&shareClass=NA&documentId=2212465%7E2224307%7E2275834%7E2249884&iframeUrlOverride=%2Fus%2Findividual%2Fliterature%2Fprospectus%2Fp-ishares-bitcoin-trust-12-31.pdf)
+[^34]: Foytik, P. *Quantifying Bitcoin Network Resilience Through Critical Scenario Discovery*, University of Wyoming Bitcoin Research Institute Workshop, 2026. [https://arxiv.org/abs/2608.05461](https://arxiv.org/abs/2608.05461) (data and code: [https://github.com/pfoytik/bitcoin-fork-governance-study](https://github.com/pfoytik/bitcoin-fork-governance-study))
